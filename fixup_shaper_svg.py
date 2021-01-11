@@ -7,7 +7,9 @@ import xml.etree.ElementTree
 
 # Author: mail@HeikoBehrens.net, 2020-01-08
 #
-# Works around two bugs in the SVG export of FreeCAD 0.18.
+# Works around two bugs in the SVG export of FreeCAD 0.18 as
+# Shaper Origin rejects the file with
+#   > Unable to place design. Check that your file is formatted properly.
 #
 # Bug 1) incorrect formats length attributes which
 # separate a number and unit literal with a space, e.g. "0.35 px".
@@ -17,8 +19,6 @@ import xml.etree.ElementTree
 #   https://developer.mozilla.org/en-US/docs/Web/CSS/length#syntax
 # this is incorrect as
 #   > there is no space between the unit literal and the number.
-# Shaper Origin rejects the file with
-#   > Unable to place design. Check that your file is formatted properly.
 #
 # Bug 2) invalid CSS style "fill-rule". This is not a CSS style property
 # but an SVG attribute.
