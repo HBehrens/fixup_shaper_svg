@@ -1,5 +1,5 @@
-Works around two bugs in the SVG export of FreeCAD 0.18 as
-Shaper Origin (version Humboldt) rejects the file with
+Works around two bugs in the SVG export of [FreeCAD (0.18)](FreeCAD) as
+[Shaper Origin (Humboldt)](Shaper) rejects the file with
 
   > Unable to place design. Check that your file is formatted properly.
 
@@ -40,3 +40,5 @@ Run the unit-tests via
 python3 fixup_shaper_svg_tests.py
 ```
 
+[FreeCAD]: https://freecadweb.org
+[Shaper]: https://www.shapertools.com
