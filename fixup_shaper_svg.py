@@ -61,13 +61,14 @@ def fixup_svg(infile, outfile):
     svg = xml.etree.ElementTree.parse(infile)
     for elem in svg.iter():
         fixup_element(elem)
-    svg.write(outfile, encoding='unicode', xml_declaration=True)
+    encoding = 'unicode' if outfile == sys.stdout else 'utf-8'
+    svg.write(outfile, encoding=encoding, xml_declaration=True)
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('infile', nargs='?', type=argparse.FileType('r'), default=sys.stdin)
-    parser.add_argument('outfile', nargs='?', type=argparse.FileType('w'), default=sys.stdout)
+    parser.add_argument('outfile', nargs='?', type=argparse.FileType('wb'), default=sys.stdout)
     args = parser.parse_args()
 
     fixup_svg(infile=args.infile, outfile=args.outfile)

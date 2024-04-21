@@ -1,6 +1,7 @@
 import unittest
+import io
 
-from fixup_shaper_svg import length_value_without_spaces, style_attribute_without_fill_rule
+from fixup_shaper_svg import fixup_svg, length_value_without_spaces, style_attribute_without_fill_rule
 
 
 class LengthWithUnit(unittest.TestCase):
@@ -40,6 +41,17 @@ class StyleWithUnsupportedAttributes(unittest.TestCase):
                          style_attribute_without_fill_rule("  fill-rule: evenodd;fill:  none  ;  "))
         self.assertEqual("",
                          style_attribute_without_fill_rule(" fill-rule: evenodd; "))
+
+
+class XmlFileEncoding(unittest.TestCase):
+
+    def test_does_force_utf8(self):
+        infile = io.StringIO("""<?xml version='1.0' encoding='cp1252'?>
+<svg xmlns="http://www.w3.org/2000/svg"/>""")
+        with io.BytesIO() as outfile:
+            fixup_svg(infile, outfile)
+            self.assertEqual(b'<?xml version=\'1.0\' encoding=\'utf-8\'?>\n'
+                             b'<svg xmlns="http://www.w3.org/2000/svg" />', outfile.getvalue())
 
 
 if __name__ == '__main__':
