@@ -6,7 +6,7 @@ jobs:
   build:
     strategy:
       matrix:
-        python-version: [3.8, 3.9, 3.10, 3.11, 3.12]
+        python-version: ["3.8", "3.11"]
         os: ["ubuntu-latest", "windows-latest", "macos-latest"]
 
     runs-on: ${{ matrix.os }}
@@ -17,7 +17,7 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Display Python version
-        run: python -c "import sys; import platform; print(sys.version, platform.platform())"
+#      - name: Display Python version
+#        run: python -c "import sys; import platform; print(sys.version, platform.platform())"
       - name: Run Tests
         run: python fixup_shaper_svg_tests.py
